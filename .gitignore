@@ -1,3 +1,4 @@
 .env
 vidoe_sources/
 data
+streamlit/
