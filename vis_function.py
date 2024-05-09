@@ -2,6 +2,7 @@
 import streamlit as st 
 from streamlit_folium import st_folium
 import folium
+import matplotlib.pyplot as plt
 
 def create_popup_html(row):
     """마커 클릭 시 나타나는 팝업 HTML 생성 함수"""
@@ -45,7 +46,21 @@ def showMapred(df):
     # Streamlit에서 지도를 표시
     st_folium(map, width=1000, height=600)
 
-def rackTotCnt_hist(df):
-    """거치대 개수 히스토그램을 표시하는 함수"""
-    st.markdown("## 거치대 개수 히스토그램")
-    st.bar_chart(df['rackTotCnt'].value_counts())
+def parkingBikeTotCnt_hist(df):
+    """따릉이 개수 히스토그램을 표시하는 함수"""
+    st.markdown("#### 따릉이 개수 히스토그램")
+    hist_data = df['parkingBikeTotCnt'].value_counts().sort_index()
+    st.bar_chart(hist_data)
+
+def rackTotCnt_pie(df):
+    """거치대 개수를 파이차트로 나타내는 함수"""
+    st.markdown("#### 거치대 개수 파이차트")
+    pie_data = df['rackTotCnt'].value_counts()
+    
+    # 파이 차트 그리기
+    fig, ax = plt.subplots()
+    ax.pie(pie_data, labels=pie_data.index, autopct='%1.1f%%')
+    ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+
+    # Streamlit에 그래프 추가
+    st.pyplot(fig)
