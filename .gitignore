@@ -1,4 +1,4 @@
 .env
 vidoe_sources/
+data/
 streamlit/
-__pycache__
